@@ -1,3 +1,21 @@
+<?php
+
+require "../functions/function_with_articles.php";
+require "../functions/functions.php";
+
+$id = $_GET['searchArticle'];
+if(isset($id)) {
+    $row = search_article($_GET['searchArticle']);
+    $res = mysql_fetch_assoc($row);
+
+    unset($_GET['searchArticle']);
+
+    if ($error = error()) {
+        echo $error;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,13 +29,22 @@
     <p><input type="submit" value="Найти"></p>
 </form>
 
-<?php if (!empty($_GET['searchArticle'])) : ?>
-<table>
+<?php if ($res) : ?>
+<table border="1">
     <tr>
-        <td></td>
+        <td><h2><?php echo $res['title_article']?></h2></td>
+    </tr>
+    <tr>
+        <td>
+            <?php echo $res['info_article'], "<br>", "Номер статьи: ", $id?>
+        </td>
     </tr>
 </table>
 <?php endif; ?>
+
+<form action="../index.php">
+    <input type="submit" value="Главная">
+</form>
 
 </body>
 </html>

@@ -7,7 +7,7 @@
  */
 session_start();
 require_once("../functions/sql_query.php");
-require_once("../functions/functions.php");
+require_once("../functions/function_with_articles.php");
 
 if ($error = error()) {
     echo $error;

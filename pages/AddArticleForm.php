@@ -1,4 +1,5 @@
 <?php
+require "../functions/function_with_articles.php";
 require "../functions/functions.php";
 if (isset($_POST['title_article']) || isset($_POST['info_article']))
 {

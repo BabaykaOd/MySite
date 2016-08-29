@@ -1,5 +1,8 @@
 <?php
+
+require "../functions/function_with_articles.php";
 require "../functions/functions.php";
+
 if(isset($_GET['deleteArticle'])) {
     delete__article($_GET['deleteArticle']);
 
