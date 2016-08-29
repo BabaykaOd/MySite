@@ -7,6 +7,7 @@
  */
 session_start();
 require_once("../functions/sql_query.php");
+require_once ("../functions/functions.php");
 require_once("../functions/function_with_articles.php");
 
 if ($error = error()) {
@@ -42,15 +43,15 @@ $all_article = sql_query($query);
     <?php endwhile; ?>
 </table>
 
-<form action="../pages/AddArticleForm.php">
+<form action="AddArticleForm.php">
     <input type="submit" value="Добавить статью">
 </form>
 
-<form action="../pages/DeleteArticleForm.php">
+<form action="DeleteArticleForm.php">
     <input type="submit" value="Удалить статью">
 </form>
 
-<form action="../pages/SearchArticleForm.php">
+<form action="SearchArticleForm.php">
     <input type="submit" value="Найти статью">
 </form>
 
