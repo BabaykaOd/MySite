@@ -15,7 +15,7 @@ if ($error = error()) {
 }
 
 $query = "SELECT * FROM `article` WHERE 1";
-$all_article = sql_query($query);
+$all_article = sqlQuery($query);
 ?>
 
 <!DOCTYPE html>
@@ -53,6 +53,10 @@ $all_article = sql_query($query);
 
 <form action="SearchArticleForm.php">
     <input type="submit" value="Найти статью">
+</form>
+
+<form action="EditArcticleForm.php">
+    <input type="submit" value="Изменить статью">
 </form>
 
 </body>

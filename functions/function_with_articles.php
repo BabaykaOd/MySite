@@ -8,7 +8,7 @@
 
 function add_article($title, $info) {
     session_start();
-    require("sql_query.php");
+    require_once("sql_query.php");
 
     if(empty($title) || empty($info)) {
         $_SESSION['error'] = 'Одно из полей пусто';
@@ -18,13 +18,30 @@ function add_article($title, $info) {
     $query = "INSERT INTO `news`.`article` (`id_article`, `title_article`, `info_article`)
                VALUES (NULL, '" . $title . "', '" . $info . "')";
 
-    $ok = sql_query($query);
+    $ok = sqlQuery($query);
     return $ok;
 }
 
+function edit_article($id ,$title, $info) {
+    session_start();
+    require_once("sql_query.php");
+
+    if(empty($id)) {
+        $_SESSION['error'] = 'Новость не выбрана';
+        return false;
+    }
+
+    $query = "UPDATE `news`.`article` SET `title_article` = '" . $title . "' , `info_article` = '" . $info . "' 
+                WHERE `article`.`id_article` = " . $id . " ";
+    $ok = sqlQuery($query);
+    return $ok;
+}
+
+
+
 function delete__article($id) {
     session_start();
-    require("sql_query.php");
+    require_once("sql_query.php");
 
     if (empty($id)) {
         $_SESSION['error'] = 'Вы ничего не ввели';
@@ -32,7 +49,7 @@ function delete__article($id) {
     }
 
     $query = "DELETE FROM `article` WHERE id_article=" . $id;
-    $ok = sql_query($query);
+    $ok = sqlQuery($query);
     if (!$ok) {
         $_SESSION['error'] = 'Такой статьи нет';
         return $ok;
@@ -43,7 +60,7 @@ function delete__article($id) {
 
 function search_article($id) {
     session_start();
-    require("sql_query.php");
+    require_once("sql_query.php");
 
     if (empty($id)) {
         $_SESSION['error'] = 'Вы ничего не ввели';
@@ -51,7 +68,7 @@ function search_article($id) {
     }
 
     $query = "SELECT `title_article`, `info_article` FROM `article` WHERE id_article=" . $id;
-    $ok = sql_query($query);
+    $ok = sqlQuery($query);
     if (!$ok) {
         $_SESSION['error'] = 'Такой статьи нет';
         return $ok;
