@@ -1,12 +1,11 @@
 <?php
 
-require "../functions/function_with_articles.php";
+require (__DIR__ . "/../models/Article.php");
 require "../functions/functions.php";
 
 $id = $_GET['searchArticle'];
 if(isset($id)) {
-    $row = search_article($_GET['searchArticle']);
-    $res = mysql_fetch_assoc($row);
+    $row = Article::search_article($_GET['searchArticle']);
 
     unset($_GET['searchArticle']);
 
@@ -29,18 +28,20 @@ if(isset($id)) {
     <p><input type="submit" value="Найти"></p>
 </form>
 
-<?php if ($res) : ?>
+<?php if ($row) : ?>
 <table border="1">
     <tr>
-        <td><h2><?php echo $res['title_article']?></h2></td>
+        <td><h2><?php echo $row['title_article']?></h2></td>
     </tr>
     <tr>
         <td>
-            <?php echo $res['info_article'], "<br>", "Номер статьи: ", $id?>
+            <?php echo $row['info_article'], "<br>", "Номер статьи: ", $id?>
         </td>
     </tr>
 </table>
-<?php endif; ?>
+<?php
+$row = false;
+endif; ?>
 
 <form action="../index.php">
     <input type="submit" value="Главная">

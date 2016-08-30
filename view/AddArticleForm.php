@@ -1,9 +1,9 @@
 <?php
-require "../functions/function_with_articles.php";
+require (__DIR__ . "/../models/Article.php");
 require "../functions/functions.php";
 if (isset($_POST['title_article']) || isset($_POST['info_article']))
 {
-    add_article($_POST['title_article'], $_POST['info_article']);
+    Article::add_article($_POST['title_article'], $_POST['info_article']);
 
     unset($_POST['title_article']);
     unset($_POST['info_article']);

@@ -1,10 +1,10 @@
 <?php
 
-require "../functions/function_with_articles.php";
+require (__DIR__ . "/../models/Article.php");
 require "../functions/functions.php";
 
 if(isset($_GET['deleteArticle'])) {
-    delete__article($_GET['deleteArticle']);
+    Article::delete__article($_GET['deleteArticle']);
 
     unset($_GET['deleteArticle']);
 

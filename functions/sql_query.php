@@ -10,6 +10,23 @@
 
 function sqlQuery($query) {
     require_once("sql_connect.php");
-    $res = mysql_query($query);
+    $row = mysql_query($query);
+    return $row;
+}
+
+function sqlQueryGetALL($query) {
+    require_once("sql_connect.php");
+    $row = mysql_query($query);
+    $data = [];
+    while (false != $res = mysql_fetch_array($row)) {
+        $data[] = $res;
+    }
+    return $data;
+}
+
+function sqlQueryGetOnce($query) {
+    require_once("sql_connect.php");
+    $row = mysql_query($query);
+    $res = mysql_fetch_assoc($row);
     return $res;
 }

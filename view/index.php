@@ -8,14 +8,14 @@
 session_start();
 require_once("../functions/sql_query.php");
 require_once ("../functions/functions.php");
-require_once("../functions/function_with_articles.php");
+require (__DIR__ . "/../models/Article.php");
 
 if ($error = error()) {
     echo $error;
 }
 
 $query = "SELECT * FROM `article` WHERE 1";
-$all_article = sqlQuery($query);
+$all_article = sqlQueryGetALL($query);
 ?>
 
 <!DOCTYPE html>
@@ -28,19 +28,19 @@ $all_article = sqlQuery($query);
 
 <table border="1">
     <caption>Последние статьи</caption>
-    <?php while ($res = mysql_fetch_assoc($all_article)) : ?>
+    <?php foreach ($all_article as $res) : ?>
         <tr>
-            <td><h2><?php echo $res['title_article']?></h2></td>
+            <td><h2><?php echo $res['title_article'] ?></h2></td>
         </tr>
         <tr>
             <td>
-                <?php echo $res['info_article'], "<br>", "Номер статьи: ", $res['id_article']?>
+                <?php echo $res['info_article'], "<br>", "Номер статьи: ", $res['id_article'] ?>
             </td>
         </tr>
         <tr>
             <td></br></td>
         </tr>
-    <?php endwhile; ?>
+    <?php endforeach; ?>
 </table>
 
 <form action="AddArticleForm.php">

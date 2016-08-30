@@ -1,12 +1,11 @@
 <?php
-require_once "../functions/function_with_articles.php";
+require (__DIR__ . "/../models/Article.php");
 require_once "../functions/functions.php";
 
 $id = (int)$_GET['editArticle'];
 
 if(isset($_GET['editArticle'])) {
-    $row = search_article($id);
-    $res = mysql_fetch_assoc($row);
+    $row = Article::search_article($id);
 
     unset($_GET['editArticle']);
 
@@ -17,7 +16,7 @@ if(isset($_GET['editArticle'])) {
 
 if (isset($_POST['title_article']) || isset($_POST['info_article']))
 {
-    edit_article($id, $_POST['title_article'], $_POST['info_article']);
+    Article::edit_article($id, $_POST['title_article'], $_POST['info_article']);
 
     unset($_POST['title_article']);
     unset($_POST['info_article']);
@@ -40,7 +39,7 @@ if (isset($_POST['title_article']) || isset($_POST['info_article']))
 
 
 
-<?php if ($res) : ?>
+<?php if ($row) : ?>
     <table border="1">
         <tr>
             <td>
@@ -52,7 +51,7 @@ if (isset($_POST['title_article']) || isset($_POST['info_article']))
             </td>
         </tr>
     </table>
-<?php elseif(!$res) : ?>
+<?php elseif(!$row) : ?>
     <form>
         <p>Введите номер статьи котрую хотите изменить:
             <input type="number" name="editArticle"></p>
